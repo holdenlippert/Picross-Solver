@@ -20,14 +20,14 @@ class Grid:
     
     def setcolumn(self, vals, id):
         if len(vals) != self.size:
-            print "Vals is wrong length.\nVals:%s\nSize:%d" % (vals, self.size)
+            print("Vals is wrong length.\nVals:%s\nSize:%d" % (vals, self.size))
             assert False
         for i, elem in enumerate(vals):
             self.grid[i][id] = elem
 
     def setrow(self, vals, id):
         if len(vals) != self.size:
-            print "Vals is wrong length.\nVals:%s\nSize:%d" % (vals, self.size)
+            print("Vals is wrong length.\nVals:%s\nSize:%d" % (vals, self.size))
             assert False
         self.grid[id] = vals
         

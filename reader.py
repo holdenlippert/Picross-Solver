@@ -15,8 +15,8 @@ def read_from_text(filename):
         lines = f.readlines()
         collines = lines[1:lines.index("\n")]
         rowlines = lines[lines.index("\n") + 2:]
-        colspecs = [map(int, line.strip().rstrip().split(' ')) for line in collines]
-        rowspecs = [map(int, line.strip().rstrip().split(' ')) for line in rowlines]
+        colspecs = [list(map(int, line.strip().rstrip().split(' '))) for line in collines]
+        rowspecs = [list(map(int, line.strip().rstrip().split(' '))) for line in rowlines]
         assert len(colspecs) == len(rowspecs)
         size = len(colspecs)
         return colspecs, rowspecs, size
@@ -35,16 +35,16 @@ def read_specs(filename):
 
 def main(args):
     if len(args) != 2:
-        print "Usage: %s [filename]" % args[0]
+        print("Usage: %s [filename]" % args[0])
         return 1
     if not os.path.isfile(args[1]):
-        print "Could not find file '%s'." % args[1]
+        print("Could not find file '%s'." % args[1])
         return 1
 
     try:
-        print read_specs(args[1])
+        print(read_specs(args[1]))
     except ValueError:
-        print "'%s' has an unknown extension. Use a file with .txt or .png extension." % args[1]
+        print("'%s' has an unknown extension. Use a file with .txt or .png extension." % args[1])
         return 1
 
     return 0

@@ -42,7 +42,7 @@ class UnsolvableException(Exception):
 
 def log(*messages):
     if LOG:
-        print "Log:\t", ' '.join(map(str, messages))
+        print("Log:\t", ' '.join(map(str, messages)))
     
 def fits(row, specs):
     """
@@ -94,20 +94,20 @@ def validoptions(currentvals, spec):
 def leftmost(currentvals, spec):
     if spec == []:
         if True in currentvals:
-            raise UnsolvableException, "True in currentvals"
+            raise UnsolvableException("True in currentvals")
         return [False] * len(currentvals)
 
     if currentvals == [] or spec[0] > len(currentvals):
-        raise UnsolvableException, "Ran out of currentvals: " + str((currentvals, spec))
+        raise UnsolvableException("Ran out of currentvals: " + str((currentvals, spec)))
 
     if spec[0] == len(currentvals):
         if False in currentvals:
-            raise UnsolvableException, "False blocking trues: " + str((currentvals, spec))
+            raise UnsolvableException("False blocking trues: " + str((currentvals, spec)))
         return [True] * spec[0]
 
     if False in currentvals[:spec[0]]:
         if True in currentvals[:currentvals.index(False)]:
-            raise UnsolvableException, "False blocking trues: " + str((currentvals, spec))
+            raise UnsolvableException("False blocking trues: " + str((currentvals, spec)))
         rest = leftmost(currentvals[currentvals.index(False) + 1:], spec)
         return [False] * (currentvals.index(False) + 1) + rest
 
@@ -158,18 +158,18 @@ def update(currentvals, spec):
     return vals
 
 def solve(grid, colspecs, rowspecs, watch=False):
-    for i in cycle(range(2 * grid.size)):
+    for i in cycle(list(range(2 * grid.size))):
         if grid.isSolved():
             if watch:
-                print "Solved it!\n"
+                print("Solved it!\n")
             break
         if i % 2 == 0:
-            grid.updatecolumn(colspecs[i/2], i/2)
+            grid.updatecolumn(colspecs[i//2], i//2)
         else:
-            grid.updaterow(rowspecs[i/2], i/2)
+            grid.updaterow(rowspecs[i//2], i//2)
         time.sleep(.01 if watch else 0)
         if watch:
-            print "\n" * 100, grid
+            print("\n" * 100, grid)
 
 
 

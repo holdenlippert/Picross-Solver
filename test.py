@@ -332,20 +332,20 @@ class TestSolver(object):
     def getSolution(self):
         self.colspecs, self.rowspecs, self.size = reader.read_specs(self.testfile)
         G = Grid(self.size)
-        for i in cycle(range(2 * self.size)):
+        for i in cycle(list(range(2 * self.size))):
             if G.isSolved():
                 break
             if i % 2 == 0:
                 G.oldupdatecolumn(self.colspecs[i/2], i/2)
             else:
                 G.oldupdaterow(self.rowspecs[i/2], i/2)
-        print "\n", G
+        print("\n", G)
         return G
 
     def test_solver(self):
         solution = self.getSolution()
         G = Grid(self.size)
-        for i in cycle(range(2 * self.size)):
+        for i in cycle(list(range(2 * self.size))):
             if G.isSolved():
                 break
             if i % 2 == 0:
